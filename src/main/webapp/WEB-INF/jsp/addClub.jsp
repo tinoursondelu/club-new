@@ -17,15 +17,16 @@
 </head>
 <body>
 
-	<h2>Club</h2>
+	<h2 class="display-3 text-center mb-4">Club</h2>
 
-<div class="col-12 row">
-	<table class="table-dark table-striped col-6">
+<div class="col-12 row align-item-center">
+	<table class="table-dark table-striped col-6 offset-1">
 		<thead>
 			<tr>
 				<th>Club's name</th>
 				<th>City</th>
 				<th>Category</th>
+				<th>Details</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,13 +35,22 @@
 					<td>${club.name}</td>
 					<td>${club.ville}</td>
 					<td>${club.category}</td>
+					<td>
+						<button type="button"
+						data-val="${club.id}" 
+						class="btn btn-success club-detail-btn" 
+						title="See">
+						Details
+						</button>
+					</td>
+
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<form class="col-6" action="addClub" method="post">
-		<h2>Ajouter un utilisateur</h2>
+	<form class="col-4" action="addClub" method="post">
+		<h2>Ajouter un Club</h2>
 
 		<p class="form-group">
 			<label for="name">Club's name</label> <input type="text"
@@ -53,7 +63,7 @@
 		</p>
 
 		<p class="form-group">
-			<label for="category">Category</label> 
+			<label for="category">Category</label>
 			<select class="select form-control" name="category" id="category">
 				<c:forEach items="${Category.values()}" var="y">
 					<option value="${y}">${y}</option>
@@ -68,7 +78,7 @@
 
 		<p class="form-group text-center">
 			<input type="submit" id=""
-				class="btn btn-success align-item-center user-valid" value="Valider">
+				class="btn btn-success align-item-center user-valid club-valid-btn" value="Valider">
 			<input type="reset" class="btn btn-secondary" name="reset"
 				value="Reset">
 		</p>

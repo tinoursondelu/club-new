@@ -11,7 +11,7 @@ public class ClubService {
 	
 	ClubDao cd = new ClubDao();
 	
-	public void addNewClub(String name, String ville, Category category, List<Team> clubTeams) {
+	public Club addNewClub(String name, String ville, Category category, List<Team> clubTeams) {
 		Club club = new Club();
 		System.out.println("club créé");
 		club.setName(name);
@@ -20,6 +20,7 @@ public class ClubService {
 		club.setClubTeams(clubTeams);
 		cd.save(club);
 		System.out.println("club enregistré");
+		return club;
 	}
 	
 	public void removeClub(Club club) {

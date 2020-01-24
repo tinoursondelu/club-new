@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -19,7 +20,7 @@ public class Club {
 	private String ville;
 	@Enumerated(EnumType.STRING)
 	private Category category;
-	@OneToMany(mappedBy="teamClub")
+	@OneToMany(mappedBy="teamClub", fetch=FetchType.EAGER)
 	private List<Team> clubTeams;
 	
 //**************** CONSTRUCTORS *****************
@@ -68,6 +69,11 @@ public class Club {
 
 	public void setClubTeams(List<Team> clubTeams) {
 		this.clubTeams = clubTeams;
+	}
+
+	@Override
+	public String toString() {
+		return "Club [id=" + id + ", name=" + name + ", ville=" + ville + ", category=" + category + "]";
 	}
 	
 	

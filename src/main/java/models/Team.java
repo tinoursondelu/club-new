@@ -10,7 +10,6 @@ public class Team {
 	@GeneratedValue
 	private int id;
 	private String teamname;
-	private boolean home;
 	@ManyToMany(mappedBy="playerTeams")
 	private List<Player> players;
 	@OneToMany(mappedBy="bookingTeam")
@@ -44,14 +43,6 @@ public class Team {
 
 	public void setTeamname(String teamname) {
 		this.teamname = teamname;
-	}
-
-	public boolean isHome() {
-		return home;
-	}
-
-	public void setHome(boolean home) {
-		this.home = home;
 	}
 
 	public List<Player> getPlayers() {

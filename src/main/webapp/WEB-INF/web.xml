@@ -11,9 +11,31 @@
 		<servlet-name>AddClubServlet</servlet-name>
 		<servlet-class>controllers.AddClubServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ClubDetailServlet</display-name>
+		<servlet-name>ClubDetailServlet</servlet-name>
+		<servlet-class>controllers.ClubDetailServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>AddTeamServlet</display-name>
+		<servlet-name>AddTeamServlet</servlet-name>
+		<servlet-class>controllers.AddTeamServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AddClubServlet</servlet-name>
 		<url-pattern>/AddClubServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ClubDetailServlet</servlet-name>
+		<url-pattern>/ClubDetailServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddTeamServlet</servlet-name>
+		<url-pattern>/AddTeamServlet</url-pattern>
 	</servlet-mapping>
 
 </web-app>

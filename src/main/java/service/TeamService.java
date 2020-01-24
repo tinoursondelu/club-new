@@ -13,11 +13,10 @@ public class TeamService {
 	
 	TeamDao td = new TeamDao();
 	
-	private void addNewTeam(String teamname, boolean home, List<Booking> bookings, List<Player> players,
+	public void addNewTeam(String teamname, List<Booking> bookings, List<Player> players,
 			List<Result> results, Club teamClub) {
 		Team team = new Team();
 		team.setTeamname(teamname);
-		team.setHome(home);
 		team.setBookings(bookings);
 		team.setPlayers(players);
 		team.setResults(results);
@@ -25,13 +24,18 @@ public class TeamService {
 		td.save(team);
 	}
 	
-	private void RemoveTeam(Team team) {
+	public void RemoveTeam(Team team) {
 		td.delete(team);
 	}
 	
-	private Team findTeamById(int id) {
+	public Team findTeamById(int id) {
 		Team team = td.findById(id);
 		return team;
+	}
+	
+	public List<Team> findTeamByClubId(int idClub) {
+		return td.findTeamByClubId(idClub);
+		
 	}
 
 }

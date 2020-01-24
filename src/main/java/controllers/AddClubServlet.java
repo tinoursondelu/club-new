@@ -21,7 +21,7 @@ public class AddClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	ClubService cs = new ClubService();
-	
+
 
 	public AddClubServlet() {
 		super();
@@ -38,25 +38,28 @@ public class AddClubServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("debut du post");
-//		for (Club club: clubs) {
-//			System.out.println("debut boucle servlet");
-//			if (club.getName().equals(request.getParameter("name"))) {
-//				System.out.println("debut condition=true");
-//				return;
-//			} else {
-				System.out.println("debut condition=false");
-				List<Team> team = new ArrayList<Team>();
-				cs.addNewClub(request.getParameter("name"),
-						request.getParameter("ville"),
-						Category.valueOf(request.getParameter("category")),
-						team);
-				System.out.println("envois au service");
-//			}
-//		}
-
-		response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/addClub"));
-//		request.getRequestDispatcher("WEB-INF/jsp/addClub.jsp").forward(request, response);
+		
+		List<Club> clubs = cs.findAllClubs();
+		Club newClub = new Club();
+		boolean error = false;
+		for (Club club: clubs) {
+			if (club.getName().equals(request.getParameter("name"))) {
+				error = true;
+			}
+		}
+		if  (error == false) {
+			List<Team> team = new ArrayList<Team>();
+			newClub = cs.addNewClub(request.getParameter("name"),
+					request.getParameter("ville"),
+					Category.valueOf(request.getParameter("category")),
+					team);
+			System.out.println(newClub.toString());
+			
+		}
+		
+		request.setAttribute("newClub", newClub);
+		System.out.println(newClub.toString());
+		request.getRequestDispatcher("WEB-INF/jsp/addTeam.jsp").forward(request, response);
 	}
 
 }
