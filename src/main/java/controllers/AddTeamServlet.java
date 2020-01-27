@@ -28,6 +28,9 @@ public class AddTeamServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = (((Club)request.getAttribute("newClub"))).getId();
+		if (id == 0) {
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/addTeam"));
+		}
 		List<Team> teams = (List<Team>) ts.findTeamById(id);
 		request.setAttribute("teams", teams);
 		for (Team t: teams) {

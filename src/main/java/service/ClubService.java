@@ -8,33 +8,42 @@ import models.Club;
 import models.Team;
 
 public class ClubService {
-	
+
 	ClubDao cd = new ClubDao();
-	
-	public Club addNewClub(String name, String ville, Category category, List<Team> clubTeams) {
+
+	public Club add(String name, String ville, Category category) {
 		Club club = new Club();
 		System.out.println("club créé");
 		club.setName(name);
 		club.setVille(ville);
 		club.setCategory(category);
-		club.setClubTeams(clubTeams);
 		cd.save(club);
 		System.out.println("club enregistré");
 		return club;
 	}
-	
-	public void removeClub(Club club) {
+
+	public void remove(Club club) {
 		cd.delete(club);
 	}
-	
-	public Club findClubById(int id) {
+
+	public Club findById(int id) {
 		Club club = cd.findById(id);
 		return club;
 	}
-	
-	public List<Club> findAllClubs() {
+
+	public List<Club> findAll() {
 		List<Club> clubs = cd.findAll();
 		return clubs;
+	}
+
+	public boolean verifIfExistAndNN(String name, String ville) {
+		boolean verif = true;
+		List<Club> clubs = findAll();
+		for (Club club: clubs) {
+			if (club.getName().equals(name) || name.isBlank() || ville.isBlank())
+				verif = false;
+		}
+		return verif;
 	}
 
 }

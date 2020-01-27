@@ -26,7 +26,7 @@ public class ClubDetailServlet extends HttpServlet {
 		System.out.println(request.getParameter("clubId"));
 		if (request.getParameter("clubId")!=null) {
 			int id = Integer.parseInt(request.getParameter("clubId"));
-			Club club = cs.findClubById(id);
+			Club club = cs.findById(id);
 			request.setAttribute("club", club);
 		}
 		request.getRequestDispatcher("WEB-INF/jsp/clubDetail.jsp").forward(request, response);

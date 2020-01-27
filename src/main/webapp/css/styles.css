@@ -15,11 +15,14 @@ body {
     min-height : 100vh;
     display : flex;
     flex-direction : column;
-    /* background-color : #343A40; */
     color : #e1e1e1;
     font-family: 'Open Sans', sans-serif;
     font-size : 1.6rem; /* On revient à 16px par défaut */
     line-height : 1.6;
+}
+
+.fab {
+	font-size: 2rem;
 }
 
 

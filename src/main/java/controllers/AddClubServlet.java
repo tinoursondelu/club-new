@@ -20,7 +20,7 @@ import service.ClubService;
 public class AddClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ClubService cs = new ClubService();
+	ClubService clubService = new ClubService();
 
 
 	public AddClubServlet() {
@@ -29,37 +29,26 @@ public class AddClubServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Club> clubs = cs.findAllClubs();
+		
+		List<Club> clubs = clubService.findAll();
 		request.setAttribute("clubs", clubs);
-
-
 		request.getRequestDispatcher("WEB-INF/jsp/addClub.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Club> clubs = cs.findAllClubs();
-		Club newClub = new Club();
-		boolean error = false;
-		for (Club club: clubs) {
-			if (club.getName().equals(request.getParameter("name"))) {
-				error = true;
-			}
-		}
-		if  (error == false) {
-			List<Team> team = new ArrayList<Team>();
-			newClub = cs.addNewClub(request.getParameter("name"),
+		List<Club> clubs = clubService.findAll();
+		Club Club = new Club();
+		if (clubService.verifIfExistAndNN(request.getParameter("name"), request.getParameter("ville"))) {
+			Club = clubService.add(request.getParameter("name"),
 					request.getParameter("ville"),
-					Category.valueOf(request.getParameter("category")),
-					team);
-			System.out.println(newClub.toString());
-			
+					Category.valueOf(request.getParameter("category")));
+			request.setAttribute("Club", Club);
+			request.getRequestDispatcher("WEB-INF/jsp/addTeam.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/addClub"));
 		}
-		
-		request.setAttribute("newClub", newClub);
-		System.out.println(newClub.toString());
-		request.getRequestDispatcher("WEB-INF/jsp/addTeam.jsp").forward(request, response);
 	}
 
 }

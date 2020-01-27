@@ -21,10 +21,15 @@ pageEncoding="UTF-8" import="models.Team"%>
 
     <div class="col-12 row">
         <div class="">
-
+        <p>${newClub.id}</p>
+<c:if test="${newClub.id = null}">
+<p>plop</p>
+</c:if>
             <p>${newClub.id}</p>
 
             <ul>
+            
+            
 <%-- 
                 <c:forEach items="teams" var="team">
                 <li>${team.id}</li>
